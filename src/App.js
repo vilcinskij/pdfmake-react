@@ -1,23 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import { useEffect, useState } from "react";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 function App() {
+  var docInfo = {
+    info: {
+      title: "tested PDF",
+      author: "vilcinskij.com",
+      subject: "subject",
+      keywords: "words",
+    },
+    pageSize: "A4",
+    pageMargins: [50, 50, 30, 60],
+    header: function (currentPage, pageCount) {
+      return {
+        text: currentPage.toString() + "from" + pageCount,
+        alignment: "right",
+        margin: [0, 30, 10, 50],
+      };
+    },
+    footer: [
+      {
+        text: "нижний колонтитул",
+        alignment: "center",
+      },
+    ],
+    content: [
+      {
+        text: "ТЕКСТ ПАРАГРАФА",
+      },
+    ],
+  };
+  const [url, setUrl] = useState(null);
+
+  const createPdf = () => {
+    const pdfGenerator = pdfMake.createPdf(docInfo);
+    pdfGenerator.download("cmr.pdf");
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={createPdf}>Generate PDF</button>
     </div>
   );
 }
