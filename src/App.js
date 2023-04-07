@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 function App() {
