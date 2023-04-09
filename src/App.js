@@ -17,7 +17,7 @@ function App() {
     pageMargins: [50, 50, 30, 60],
     header: function (currentPage, pageCount) {
       return {
-        text: currentPage.toString() + "from" + pageCount,
+        // text: currentPage.toString() + "from" + pageCount,
         alignment: "right",
         margin: [0, 30, 10, 50],
       };
